@@ -44,7 +44,7 @@ If you use the `/test_SNP`, run the following command:
 Rscript --vanilla run_pop.r -i BAF -o CONT -p Mapping250K_Nsp
 ```
 
-For testing sequencing data, you can download the 1000Genomes phase3 version 5 data from [1000Genomes project FTP site](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502).
+For testing sequencing data, you can download the 1000Genomes phase3 version 5 data from 1000Genomes project FTP site (ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502).
 If you use sequencing data, run the following command:
 
 ```
@@ -119,7 +119,6 @@ Options | Description
 FRAC | the 9 fractional values representing estimated theoretical ancestors from admixture model.
 CONT | voting percentage of 5 continental groups, the final result with highest vote and a confidence score<sup>* </sup>.
 POP | voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>* </sup>.
-ALL | voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>* </sup>.
-In addition, the voting summary of the population groups belonging to each continental group, then a final result of predicted continental group with a confidence score <sup>* </sup>.
+ALL | voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>* </sup>. In addition, the voting summary of the population groups belonging to each continental group, then a final result of predicted continental group with a confidence score <sup>* </sup>.
 
 <sup>* </sup>confidence score: the different between highest and second highest voting percentage.
