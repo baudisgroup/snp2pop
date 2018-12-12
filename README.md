@@ -52,10 +52,10 @@ Rscript --vanilla run_pop.r -i GZVCF -p Sequencing -o ALL
 
 
 ## Options
-|Options||| Type | Description  |
+|Options| Type | Description  |
 | ------------- |------| --------------------------------------------------|
-| -i  --input   | TEXT | input as B allele frequency file format (BAF), or genotype calling format (GC), Birdseed genotype format (BS) for SNP array data, or Variant Call Format (VCF) / gzipped VCF (GZVCF) for sequencing data. |
-| -p --platform | TEXT | SNP array platform; omitted for sequencing data. |
+| -i --input   | TEXT | input as B allele frequency file format (BAF), or genotype calling format (GC), Birdseed genotype format (BS) for SNP array data, or Variant Call Format (VCF) / gzipped VCF (GZVCF) for sequencing data. |
+| -p --platform | TEXT | SNP array platform (see below), or Sequencing. |
 | -o --output   | TEXT | output as 9 theoretical fractions (FRAC), or output as ratio of 5 continental groups with a voting result (CONT) or ratio of 26 population groups with a voting result (POP), or both 26 populations and 5 continental groups summarized from the 26 population voting output (ALL). |
 
 The input file can be SNP array output or sequencing data. In case of sequencing data, vcf or vcf.gz file formats are supported as input for sequencing data. Only one vcf file should be placed in the directory.
