@@ -2,7 +2,7 @@
 
 Population origin mapping from cancer SNP profile into 5 continental groups as defined in 1000 Genomes Project. This tool supports mapping from B-allele frequency data generated with 9 Affymetrix SNP array platforms as well as whole-genome sequencing data as input and a population assignment to one of the five continental groups (with 97.1% accuracy, benchmarked with paired TCGA data) or one of the 26 population groups (with 92.7% accuracy, benchmarked with paired TCGA data)
 
-|AFR(_Africa_)| EUR (_Europe_) | AMR(_Admixed America_)  | EAS (_East Asia_)| SAS (_South Asia_) |
+|AFR (_Africa_)| EUR (_Europe_) | AMR (_Admixed America_)  | EAS (_East Asia_)| SAS (_South Asia_) |
 |-----------|-----------|-----------|-----------|-----------|
 |ACB (_African Caribbeans in Barbados_)| CEU (_Utah Residents (CEPH) with Northern and Western European Ancestry_) |CLM (_Colombians from Medellin, Colombia_) | CDX (_Chinese Dai in Xishuangbanna, China_) | BEB (_Bengali from Bangladesh_)|
 |ASW (_Americans of African Ancestry in SW USA_)|FIN (_Finnish in Finland_)| MXL (_Mexican Ancestry from Los Angeles USA_)| CHB (_Han Chinese in Beijing, China_) | GIH (_Gujarati Indian from Houston, Texas_)|
@@ -52,13 +52,13 @@ Rscript --vanilla run_pop.r -i GZVCF -p Sequencing -o ALL
 
 
 ## Options
-|Options        | Type | Description  |
+|Options||| Type | Description  |
 | ------------- |------| --------------------------------------------------|
 | -i  --input   | TEXT | input as B allele frequency file format (BAF), or genotype calling format (GC), Birdseed genotype format (BS) for SNP array data, or Variant Call Format (VCF) / gzipped VCF (GZVCF) for sequencing data. |
 | -p --platform | TEXT | SNP array platform; omitted for sequencing data. |
-| -o --output   | TEXT | output as 9 theoretical fractions (FRAC), or output as ratio of 5 continental groups with a voting result (CONT) or ratio of 26 population groups with a voting result. |
+| -o --output   | TEXT | output as 9 theoretical fractions (FRAC), or output as ratio of 5 continental groups with a voting result (CONT) or ratio of 26 population groups with a voting result (POP), or both 26 populations and 5 continental groups summarized from the 26 population voting output (ALL). |
 
-The input file can be SNP array output or sequencing data. In case of sequencing data, vcf or vcf.gz file formats are supported as input for sequencing data. Only one vcf file should be placed in the dicrectory.
+The input file can be SNP array output or sequencing data. In case of sequencing data, vcf or vcf.gz file formats are supported as input for sequencing data. Only one vcf file should be placed in the directory.
 
 In case of SNP array output, the current pipeline supports 9 array platforms from Affymetrix:
 
@@ -84,54 +84,30 @@ The input file should be *tab separated*. There should be 4 columns: ID (SNP ID 
 
 Example for **BAF** input format:
 
-ID	CHRO	BASEPOS	VALUE
-
-SNP_A-2131660	1	1220751	0.3487
-
-SNP_A-1967418	1	2302812	0.9451
-
-SNP_A-1969580	1	2398125	1.0000
-
-SNP_A-4263484	1	2622185	0.4612
-
-.
-
-.
-
-.
+|ID|CHRO|BASEPOS|VALUE|
+|-------------|---|-----------|-----------|
+|SNP_A-2131660|1|1220751|0.3487|
+|SNP_A-1967418|1|2302812|0.9451|
+|SNP_A-1969580|1|2398125|1.0000|
+|SNP_A-4263484|1|2622185|0.4612|
+|...|...|...|...|
 
 Example for **GC** input format:
 
-ID	CHRO	BASEPOS	VALUE
-
-SNP_1	1	1220751	AB
-
-SNP_2	1	2302812	BB
-
-SNP_3	1	2398125	BB
-
-SNP_4	1	2622185	AB
-
-.
-
-.
-
-.
+|ID|CHRO|BASEPOS|VALUE|
+|-------------|---|-----------|-----------|
+|SNP_1|1|1220751|AB|
+|SNP_2|1|2302812|BB|
+|SNP_3|1|2398125|BB|
+|SNP_4|1|2622185|AB|
+|...|...|...|...|
 
 Example for **BS** input format:
 
-ID    CHRO    BASEPOS    VALUE
-
-SNP_1    1    1220751    1
-
-SNP_2    1    2302812    2
-
-SNP_3    1    2398125    2
-
-SNP_4    1    2622185    1
-
-.
-
-.
-
-.
+|ID|CHRO|BASEPOS|VALUE|
+|-------------|---|-----------|-----------|
+|SNP_1|1|1220751|1|
+|SNP_2|1|2302812|2|
+|SNP_3|1|2398125|2|
+|SNP_4|1|2622185|1|
+|...|...|...|...|
