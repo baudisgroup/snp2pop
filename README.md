@@ -12,7 +12,8 @@ Population origin mapping from cancer SNP profile into 5 continental groups or 2
 |MSL (_Mende in Sierra Leone_)|||||
 |YRI (_Yoruba in Ibadan, Nigeria_)|||||
 
-This tool supports mapping from B-allele frequency data generated with 9 Affymetrix SNP array platforms as well as whole-genome sequencing data as input and a population assignment to one of the five continental groups (with 97.1% accuracy, benchmarked with paired TCGA data) or one of the 26 population groups (with 92.7% accuracy, benchmarked with paired TCGA data)
+This tool supports mapping from B-allele frequency data generated with 9 Affymetrix SNP array platforms as well as whole-genome sequencing data as input and a population assignment to one of the five continental groups (with 97.1% accuracy, benchmarked with paired TCGA data) or one of the 26 population groups (with 92.7% accuracy, benchmarked with paired TCGA data).  
+
 The currently supported genome version is GRCh37 (hg19). A mapping to other genome versions is planned.
 
 ## Docker version installation
@@ -59,29 +60,13 @@ Rscript --vanilla run_pop.r -i GZVCF -p Sequencing -o ALL
 | -p --platform | TEXT | SNP array platform (see below), or Sequencing. |
 | -o --output   | TEXT | output as 9 theoretical fractions (FRAC), or output as ratio of 5 continental groups with a voting result (CONT) or ratio of 26 population groups with a voting result (POP), or both 26 populations and 5 continental groups summarized from the 26 population voting output (ALL). |
 
-The input file can be SNP array output or sequencing data. In case of sequencing data, vcf or vcf.gz file formats are supported as input for sequencing data. Only one vcf file should be placed in the directory.
 
-In case of SNP array output, the current pipeline supports 9 array platforms from Affymetrix:
+### Input file
+The input file can be SNP array output or sequencing data.  
 
-- Mapping10K_Xba142
+In case of sequencing data, `vcf` or `vcf.gz` file formats are supported as input for sequencing data. Only one vcf file should be placed in the directory.
 
-- Mapping50K_Hind240
-
-- Mapping50K_Xba240
-
-- Mapping250K_Nsp
-
-- Mapping250K_Sty
-
-- GenomeWideSNP_5
-
-- GenomeWideSNP_6
-
-- CytoScan750K_Array
-
-- CytoScanHD_Array
-
-The input file should be *tab separated*. There should be 4 columns: ID (SNP ID or simply indicating row number), chromosome (1-23), nucleotide base position, and a value column (a number within 0-1 if **BAF** format, or AA/AB/BB if **GC** format).
+In case of SNP array output, file should be *tab separated*. There should be 4 columns: ID (SNP ID or simply indicating row number), chromosome (1-23), nucleotide base position, and a value column (a number within 0-1 if **BAF** format, or AA/AB/BB if **GC** format).
 
 Example for **BAF** input format:
 
@@ -112,3 +97,27 @@ Example for **BS** input format:
 |SNP_3|1|2398125|2|
 |SNP_4|1|2622185|1|
 |...|...|...|...|
+
+### Platform specification
+
+For sequencing data, "Sequencing" should be used.
+
+For SNP array, one of the following 9 array platforms should be named:
+- Mapping10K_Xba142
+- Mapping50K_Hind240
+- Mapping50K_Xba240
+- Mapping250K_Nsp
+- Mapping250K_Sty
+- GenomeWideSNP_5
+- GenomeWideSNP_6
+- CytoScan750K_Array
+- CytoScanHD_Array
+
+### Output file
+`FRAC` option outputs the 9 fractional values representing estimated theoretical ancestors from admixture model.
+`CONT` option outputs voting percentage of 5 continental groups, the final result with highest vote and a confidence score<sup>*</sup>.
+`POP` option outputs voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>*</sup>.
+`ALL` option outputs voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>*</sup>, also the voting summary of the population groups belonging to each continental group, then a final result of predicted continental group with a confidence score<sup>*</sup>.
+
+<sup>*</sup>confidence score: the different between highest and second highest voting percentage.
+
