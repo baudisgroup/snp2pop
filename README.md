@@ -1,6 +1,6 @@
 # snp2pop
 
-Population origin mapping from cancer SNP profile into 5 continental groups or 26 population groups as defined in 1000 Genomes Project. 
+Population origin mapping from cancer SNP profile into 5 continental groups or 26 population groups as defined in 1000 Genomes Project.
 
 |AFR (_Africa_)| EUR (_Europe_) | AMR (_Admixed America_)  | EAS (_East Asia_)| SAS (_South Asia_) |
 |-----------|-----------|-----------|-----------|-----------|
@@ -31,7 +31,7 @@ After entering the interactive mode of the container, you can place your input f
 ```
 Rscript --vanilla run_pop.r <parameters>
 ```
-Then you will receive in the `/results` folder under `$hostdir` your mapping results.
+Then you will obtain your mapping results in the `/results` folder under `$hostdir`.
 
 ### Demo Example with test data
 You need to download the `/test_SNP` folder from [here](https://github.com/baudisgroup/snp2pop/tree/master/test_SNP) and copy the absolute path as `$test_dir`. These 2 files are processed BAF files from GEO repository with genotyping platform "Mapping250K_Nsp".
@@ -44,7 +44,7 @@ If you use the `/test_SNP`, run the following command:
 Rscript --vanilla run_pop.r -i BAF -o CONT -p Mapping250K_Nsp
 ```
 
-For testing sequencing data, you can download the 1000Genomes phase3 version 5 data from [1000Genomes project FTP site](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/).
+For testing sequencing data, you can download the 1000Genomes phase3 version 5 data from [1000Genomes project FTP site](ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502).
 If you use sequencing data, run the following command:
 
 ```
@@ -61,14 +61,14 @@ Rscript --vanilla run_pop.r -i GZVCF -p Sequencing -o ALL
 | -o --output   | TEXT | output as 9 theoretical fractions (FRAC), or output as ratio of 5 continental groups with a voting result (CONT) or ratio of 26 population groups with a voting result (POP), or both 26 populations and 5 continental groups summarized from the 26 population voting output (ALL). |
 
 
-### Input file
+### Input file -i --input
 The input file can be SNP array output or sequencing data.  
 
 In case of sequencing data, `vcf` or `vcf.gz` file formats are supported as input for sequencing data. Only one vcf file should be placed in the directory.
 
 In case of SNP array output, file should be *tab separated*. There should be 4 columns: ID (SNP ID or simply indicating row number), chromosome (1-23), nucleotide base position, and a value column (a number within 0-1 if **BAF** format, or AA/AB/BB if **GC** format).
 
-Example for **BAF** input format:
+- Example for **BAF** input format:
 
 |ID|CHRO|BASEPOS|VALUE|
 |-------------|---|-----------|-----------|
@@ -78,7 +78,7 @@ Example for **BAF** input format:
 |SNP_A-4263484|1|2622185|0.4612|
 |...|...|...|...|
 
-Example for **GC** input format:
+- Example for **GC** input format:
 
 |ID|CHRO|BASEPOS|VALUE|
 |-------------|---|-----------|-----------|
@@ -88,7 +88,7 @@ Example for **GC** input format:
 |SNP_4|1|2622185|AB|
 |...|...|...|...|
 
-Example for **BS** input format:
+- Example for **BS** input format:
 
 |ID|CHRO|BASEPOS|VALUE|
 |-------------|---|-----------|-----------|
@@ -98,7 +98,7 @@ Example for **BS** input format:
 |SNP_4|1|2622185|1|
 |...|...|...|...|
 
-### Platform specification
+### Platform specification -p --platform
 
 For sequencing data, "Sequencing" should be used.
 
@@ -113,13 +113,13 @@ For SNP array, one of the following 9 array platforms should be named:
 - CytoScan750K_Array
 - CytoScanHD_Array
 
-### Output file
+### Output file -o --output
 Options | Description
---- | --- 
-`FRAC` | the 9 fractional values representing estimated theoretical ancestors from admixture model.
-`CONT` | voting percentage of 5 continental groups, the final result with highest vote and a confidence score<sup>*</sup>.
-`POP` | voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>*</sup>.
-`ALL` | voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>*</sup>, also the voting summary of the population groups belonging to each continental group, then a final result of predicted continental group with a confidence score<sup>*</sup>.
+--- | ---
+FRAC | the 9 fractional values representing estimated theoretical ancestors from admixture model.
+CONT | voting percentage of 5 continental groups, the final result with highest vote and a confidence score<sup>* </sup>.
+POP | voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>* </sup>.
+ALL | voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>* </sup>.
+In addition, the voting summary of the population groups belonging to each continental group, then a final result of predicted continental group with a confidence score <sup>* </sup>.
 
-<sup>*</sup>confidence score: the different between highest and second highest voting percentage.
-
+<sup>* </sup>confidence score: the different between highest and second highest voting percentage.
