@@ -2,7 +2,8 @@
 
 Population origin mapping from cancer SNP profile into 5 continental groups as defined in 1000 Genomes Project. This tool supports mapping from B-allele frequency data generated with 9 Affymetrix SNP array platforms as well as whole-genome sequencing data as input and a population assignment to one of the five continental groups (with 97.1% accuracy, benchmarked with paired TCGA data) or one of the 26 population groups (with 92.7% accuracy, benchmarked with paired TCGA data)
 
-|AFR(_Africa_) | EUR (_Europe_) | AMR(_Admixed America_)  | EAS (_East Asia_)| SAS (_South Asia_) |
+|AFR(_Africa_)| EUR (_Europe_) | AMR(_Admixed America_)  | EAS (_East Asia_)| SAS (_South Asia_) |
+|-----------|-----------|-----------|-----------|-----------|
 |ACB (_African Caribbeans in Barbados_)| CEU (_Utah Residents (CEPH) with Northern and Western European Ancestry_) |CLM (_Colombians from Medellin, Colombia_) | CDX (_Chinese Dai in Xishuangbanna, China_) | BEB (_Bengali from Bangladesh_)|
 |ASW (_Americans of African Ancestry in SW USA_)|FIN (_Finnish in Finland_)| MXL (_Mexican Ancestry from Los Angeles USA_)| CHB (_Han Chinese in Beijing, China_) | GIH (_Gujarati Indian from Houston, Texas_)|
 |ESN (_Esan in Nigeria_)|GBR (_British in England and Scotland_)|PEL (_Peruvians from Lima, Peru_)|CHS (_Southern Han Chinese_)|ITU (_Indian Telugu from the UK_)|
