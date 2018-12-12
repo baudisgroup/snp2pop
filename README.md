@@ -1,6 +1,6 @@
 # snp2pop
 
-Population origin mapping from cancer SNP profile into 5 continental groups as defined in 1000 Genomes Project. This tool supports mapping from B-allele frequency data generated with 9 Affymetrix SNP array platforms as well as whole-genome sequencing data as input and a population assignment to one of the five continental groups (with 97.1% accuracy, benchmarked with paired TCGA data) or one of the 26 population groups (with 92.7% accuracy, benchmarked with paired TCGA data)
+Population origin mapping from cancer SNP profile into 5 continental groups or 26 population groups as defined in 1000 Genomes Project. 
 
 |AFR (_Africa_)| EUR (_Europe_) | AMR (_Admixed America_)  | EAS (_East Asia_)| SAS (_South Asia_) |
 |-----------|-----------|-----------|-----------|-----------|
@@ -12,6 +12,7 @@ Population origin mapping from cancer SNP profile into 5 continental groups as d
 |MSL (_Mende in Sierra Leone_)|||||
 |YRI (_Yoruba in Ibadan, Nigeria_)|||||
 
+This tool supports mapping from B-allele frequency data generated with 9 Affymetrix SNP array platforms as well as whole-genome sequencing data as input and a population assignment to one of the five continental groups (with 97.1% accuracy, benchmarked with paired TCGA data) or one of the 26 population groups (with 92.7% accuracy, benchmarked with paired TCGA data)
 The currently supported genome version is GRCh37 (hg19). A mapping to other genome versions is planned.
 
 ## Docker version installation
