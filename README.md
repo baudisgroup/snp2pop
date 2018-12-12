@@ -1,6 +1,17 @@
 # snp2pop
 
-Population origin mapping from cancer SNP profile into 5 continental groups as defined in 1000 Genomes Project. This tool supports mapping from B-allele frequency data generated with 9 Affymetrix SNP array platforms as well as whole-genome sequencing data as input and a population assignment to one of the five continental groups (with 98.7% accuracy, benchmarked with paired TCGA data)-- AFR(_Africa_), EUR (_Europe_), AMR(_Admixed America_), EAS (_East Asia_), SAS (_South Asia_) or one of the 26 population groups (with ?% accuracy, benchmarked with paired TCGA data) --  ACB (_African Caribbeans in Barbados_), ASW (_Americans of African Ancestry in SW USA_), BEB (_Bengali from Bangladesh_), CDX (_Chinese Dai in Xishuangbanna, China_), CEU (_Utah Residents (CEPH) with Northern and Western European Ancestry_), CHB (_Han Chinese in Beijing, China_), CHS (_Southern Han Chinese_), CLM (_Colombians from Medellin, Colombia_), ESN (_Esan in Nigeria_), FIN (_Finnish in Finland_), GBR (_British in England and Scotland_), GIH (_Gujarati Indian from Houston, Texas_), GWD (_Gambian in Western Divisions in the Gambia_), IBS (_Iberian Population in Spain_), ITU (_Indian Telugu from the UK_), JPT (_Japanese in Tokyo, Japan_), KHV (_Kinh in Ho Chi Minh City, Vietnam_), LWK (_Luhya in Webuye, Kenya_), MSL (_Mende in Sierra Leone_), MXL (_Mexican Ancestry from Los Angeles USA_), PEL (_Peruvians from Lima, Peru_), PJL (_Punjabi from Lahore, Pakistan_), PUR (_Puerto Ricans from Puerto Rico_), STU (_Sri Lankan Tamil from the UK_), TSI (_Toscani in Italia_), YRI (_Yoruba in Ibadan, Nigeria_). The currently supported genome version is GRCh37 (hg19). A mapping to other genome versions is planned.
+Population origin mapping from cancer SNP profile into 5 continental groups as defined in 1000 Genomes Project. This tool supports mapping from B-allele frequency data generated with 9 Affymetrix SNP array platforms as well as whole-genome sequencing data as input and a population assignment to one of the five continental groups (with 97.1% accuracy, benchmarked with paired TCGA data) or one of the 26 population groups (with 92.7% accuracy, benchmarked with paired TCGA data)
+
+|AFR(_Africa_) | EUR (_Europe_) | AMR(_Admixed America_)  | EAS (_East Asia_)| SAS (_South Asia_) |
+|ACB (_African Caribbeans in Barbados_)| CEU (_Utah Residents (CEPH) with Northern and Western European Ancestry_) |CLM (_Colombians from Medellin, Colombia_) | CDX (_Chinese Dai in Xishuangbanna, China_) | BEB (_Bengali from Bangladesh_)|
+|ASW (_Americans of African Ancestry in SW USA_)|FIN (_Finnish in Finland_)| MXL (_Mexican Ancestry from Los Angeles USA_)| CHB (_Han Chinese in Beijing, China_) | GIH (_Gujarati Indian from Houston, Texas_)|
+|ESN (_Esan in Nigeria_)|GBR (_British in England and Scotland_)|PEL (_Peruvians from Lima, Peru_)|CHS (_Southern Han Chinese_)|ITU (_Indian Telugu from the UK_)|
+|GWD (_Gambian in Western Divisions in the Gambia_)|IBS (_Iberian Population in Spain_)|PUR (_Puerto Ricans from Puerto Rico_)|JPT (_Japanese in Tokyo, Japan_)|PJL (_Punjabi from Lahore, Pakistan_)|
+|LWK (_Luhya in Webuye, Kenya_)|TSI (_Toscani in Italia_)||KHV (_Kinh in Ho Chi Minh City, Vietnam_)|STU (_Sri Lankan Tamil from the UK_)|
+|MSL (_Mende in Sierra Leone_)|||||
+|YRI (_Yoruba in Ibadan, Nigeria_)|||||
+
+The currently supported genome version is GRCh37 (hg19). A mapping to other genome versions is planned.
 
 ## Docker version installation
 The easiest way is to use docker application. First, install [Docker application](https://docs.docker.com/install/), then:
@@ -40,11 +51,11 @@ Rscript --vanilla run_pop.r -i GZVCF -p Sequencing -o ALL
 
 
 ## Options
-  -i --input TEXT         input as B allele frequency file format (BAF), or genotype calling format (GC), Birdseed genotype format (BS) for SNP array data, or Variant Call Format (VCF) / gzipped VCF (GZVCF) for sequencing data.
-
-  -p --platform  TEXT     SNP array platform; omitted for sequencing data.
-
-  -o --output TEXT        output as 9 theoretical fractions (FRAC), or output as ratio of 5 continental groups with a voting result (CONT) or ratio of 26 population groups with a voting result.
+|Options        | Type | Description  |
+| ------------- |------| --------------------------------------------------|
+| -i  --input   | TEXT | input as B allele frequency file format (BAF), or genotype calling format (GC), Birdseed genotype format (BS) for SNP array data, or Variant Call Format (VCF) / gzipped VCF (GZVCF) for sequencing data. |
+| -p --platform | TEXT | SNP array platform; omitted for sequencing data. |
+| -o --output   | TEXT | output as 9 theoretical fractions (FRAC), or output as ratio of 5 continental groups with a voting result (CONT) or ratio of 26 population groups with a voting result. |
 
 The input file can be SNP array output or sequencing data. In case of sequencing data, vcf or vcf.gz file formats are supported as input for sequencing data. Only one vcf file should be placed in the dicrectory.
 
