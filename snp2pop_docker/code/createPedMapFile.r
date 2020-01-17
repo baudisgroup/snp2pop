@@ -1,3 +1,9 @@
+library(readr)
+library(Rcpp)
+sourceCpp('code.cpp')
+options(readr.num_columns = 0)
+options(stringsAsFactors = F)
+
 convertXto23 <- function(chr){
     if (chr == 'X') {
         return (23)
@@ -9,9 +15,7 @@ createPedMapFile <- function(platform,file_format){
 
     targetdir <- '/data'
     input_files <- list.files(targetdir)
-    input_files <- input_files[!input_files %in% c('tmp','results')]
-
-    options(stringsAsFactors = F)
+    input_files <- input_files[!input_files %in% c('tmp','results', 'reference')]
 
     anno <- read.table(sprintf('/source/%s_anno.tsv',platform),header=T,stringsAsFactors = F)
     anno[,3] <- sapply(anno[,3],convertXto23)
@@ -22,8 +26,8 @@ createPedMapFile <- function(platform,file_format){
     missingID <- c()
     for (f in input_files){
         sample_name <- unlist(strsplit(f,split = '.tsv',fixed = T))[1]
-        fracb <- read.table(file.path(targetdir,f),header = T,stringsAsFactors = F)
-        fracb$chr_pos <- paste(fracb[,2],fracb[,3],sep = '_')
+        fracb <- read_delim(file.path(targetdir,f), "\t", escape_double = FALSE, trim_ws = TRUE)
+        fracb$chr_pos <- paste(fracb[[2]],fracb[[3]],sep = '_')
 
         if (sum(!anno$chr_pos %in% fracb$chr_pos) > 0) {
             warning(sprintf('For %s: fracB file incomplete.',sample_name))
@@ -48,7 +52,7 @@ createPedMapFile <- function(platform,file_format){
 
     ### create ped file
     pedfile <-file.path(targetdir, 'tmp', 'plink,sample.ped')
-    sink(file = pedfile)
+    if (file.exists(pedfile)) file.remove(pedfile)
 
     totalCount <- length(input_files)
     count <- 0
@@ -56,41 +60,26 @@ createPedMapFile <- function(platform,file_format){
         count <- count+1
         sample_name <- unlist(strsplit(f,split = '.tsv',fixed = T))[1]
 
-        print(paste(sprintf('(%s/%s) Currently processing',count,totalCount), sample_name, '...')
+        message(paste(sprintf('(%s/%s) Currently processing',count,totalCount), sample_name, '...'))
 
-        fracb <- read.table(file.path(targetdir,f),header = T,stringsAsFactors = F)
+        fracb <- read_delim(file.path(targetdir,f), "\t", escape_double = FALSE, trim_ws = TRUE)
 
         idx <-  match(anno$chr_pos, fracb$chr_pos)
         fracb <- fracb[idx,]
-        val <- fracb[,4]
 
         if (file_format == "GC") {
             map<- c('AA' = 0 , 'AB' = 0.5, 'BB' = 1)
-            val <- map[val]
+            fracb[[4]] <- map[fracb[[4]]]
         }
 
         if (file_format == "BS") {
-            val <- val/2
+            fracb[[4]] <- fracb[[4]]/2
         }
 
-        oneliner <- unlist(sapply(1:nrow(fracb),function(x){
+        oneliner <- onelinerCpp(fracb, anno)
 
-            if (val[x] <0.15){
-              rep(anno$Allele.A[x],2)
-            } else if (val[x] >= 0.15 & val[x] <= 0.85) {
-              c(anno$Allele.A[x],anno$Allele.B[x])
-            }else if (val[x] > 0.85){
-              rep(anno$Allele.B[x],2)
-            }else{
-              rep(0,2)
-            }
-
-        }))
-        oneliner <- as.vector(oneliner)
-
-        cat(sample_name,sample_name,rep("0",3), "-9",oneliner,"\n",sep=" ")
+        write_output_Cpp(c(sample_name,sample_name,rep("0",3), "-9",oneliner), pedfile)
     }
-    sink()
 
     ### create map file
     mapfile <-file.path(targetdir, 'tmp', 'plink,sample.map')

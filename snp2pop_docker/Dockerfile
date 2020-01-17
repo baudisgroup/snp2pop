@@ -3,7 +3,7 @@ MAINTAINER Qingyao Huang (qingyao.huang@uzh.ch)
 
 # System requirements
 
-RUN apt-get update &&\
+RUN apt-get update --fix-missing &&\
 apt-get install -y wget bzip2 unzip gcc g++ pkg-config make zlib1g-dev libncurses5-dev libncursesw5-dev libbz2-dev liblzma-dev htop &&\
 apt-get clean
 
@@ -49,7 +49,11 @@ RUN wget $URL/$ZIP -O $DST/$ZIP && \
 # Install R and dependency
 RUN apt-get install -y r-base &&\
 R -e "install.packages('randomForest',repos='http://cran.r-project.org')" &&\
-R -e "install.packages('optparse',repos='http://cran.r-project.org')"
+R -e "install.packages('optparse',repos='http://cran.r-project.org')" &&\
+R -e "install.packages('Rcpp',repos='http://cran.r-project.org')" &&\
+R -e "install.packages('readr',repos='http://cran.r-project.org')" 
+
+
 
 # Add reference and annotations to image
 ADD /source/* /source/
@@ -57,4 +61,5 @@ ADD /code/* /code/
 
 # Initiate
 WORKDIR /code
-ENTRYPOINT /bin/bash
+CMD tail -f /dev/null
+CMD /bin/bash
