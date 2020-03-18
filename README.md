@@ -122,3 +122,11 @@ POP | voting percentage of 26 population groups, the final result with highest v
 ALL | voting percentage of 26 population groups, the final result with highest vote and a confidence score<sup>* </sup>. In addition, the voting summary of the population groups belonging to each continental group, then a final result of predicted continental group with a confidence score <sup>* </sup>.
 
 <sup>* </sup>confidence score: the different between highest and second highest voting percentage.
+
+## Citation instructions
+If you use SNP2pop in a published analysis, please cite the following article:
+
+Enabling population assignment from cancer genomes with SNP2pop.<br/>
+Huang Q, Baudis M.<br/>
+Sci Rep. 2020 Mar 16;10(1):4846. [doi: 10.1038/s41598-020-61854-x](https://www.nature.com/articles/s41598-020-61854-x)<br/>
+PMID: 32179800
