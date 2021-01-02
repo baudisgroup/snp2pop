@@ -41,7 +41,7 @@ docker run -it --rm --mount type=bind,source=$test_dir,target=/data baudisgroup/
 
 If you use the `/test_SNP`, run the following command:
 ```
-Rscript --vanilla run_pop.r -i BAF -o CONT -p Mapping250K_Nsp
+Rscript --vanilla run_pop.r -i BAF -o CONT -p Mapping250K_Sty
 ```
 
 For testing sequencing data, you can download the 1000Genomes phase3 version 5 data from 1000Genomes project FTP site (ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502).
