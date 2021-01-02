@@ -34,7 +34,7 @@ Rscript --vanilla run_pop.r <parameters>
 Then you will obtain your mapping results in the `/results` folder under `$hostdir`.
 
 ### Demo Example with test data
-You need to download the `/test_SNP` folder from [here](https://github.com/baudisgroup/snp2pop/tree/master/test_SNP) and copy the absolute path as `$test_dir`. These 2 files are processed BAF files from GEO repository with genotyping platform "Mapping250K_Nsp".
+You need to download the `/test_SNP` folder from [here](https://github.com/baudisgroup/snp2pop/tree/master/test_SNP) and copy the absolute path as `$test_dir`. These 2 files are processed BAF files from GEO repository with genotyping platform "Mapping250K_Sty".
 ```
 docker run -it --rm --mount type=bind,source=$test_dir,target=/data baudisgroup/snp2pop
 ```
